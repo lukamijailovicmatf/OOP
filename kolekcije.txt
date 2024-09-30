@@ -1,0 +1,2014 @@
+Odgovori na ispitna pitanja vezana za KOLEKCIJE PODATAKA
+
+У Јави, апстрактне класе пружају основу за многе колекције. Апстрактне класе дефинишу општу функционалност и структуру, док специфичне имплементације обезбеђују конкретне детаље. Ево кратког прегледа апстрактних класа и примера на српском језику.
+
+Апстрактне класе:
+AbstractCollection<E>: Основна класа за имплементацију већине Collection интерфејса.
+AbstractList<E>: Основна класа за имплементацију List интерфејса.
+AbstractSet<E>: Основна класа за имплементацију Set интерфејса.
+AbstractQueue<E>: Основна класа за имплементацију Queue интерфејса.
+AbstractMap<K, V>: Основна класа за имплементацију Map интерфејса.
+
+
+Primer za ArrayList (upoteba AbstractList):
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingList {
+    public static void main(String[] args) {
+        List<String> shoppingList = new ArrayList<>();
+        
+        // Додавање предмета у листу за куповину
+        shoppingList.add("Млеко");
+        shoppingList.add("Хлеб");
+        shoppingList.add("Јабуке");
+        
+        // Исписивање предмета на листи за куповину
+        System.out.println("Листа за куповину:");
+        for (String item : shoppingList) {
+            System.out.println(item);
+        }
+        
+        // Уклањање предмета са листе за куповину
+        shoppingList.remove("Хлеб");
+        System.out.println("\nПосле уклањања Хлеба:");
+        for (String item : shoppingList) {
+            System.out.println(item);
+        }
+    }
+}
+
+Primer za HashSet (upotreba AbstractSet):
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class ClassroomAttendance {
+    public static void main(String[] args) {
+        Set<String> students = new HashSet<>();
+        
+        // Додавање ученика у сет
+        students.add("Марко");
+        students.add("Јелена");
+        students.add("Марија");
+        students.add("Марко"); // Дупликат, неће бити додат
+        
+        // Исписивање ученика који су присуствовали часу
+        System.out.println("Ученици који су присуствовали часу:");
+        for (String student : students) {
+            System.out.println(student);
+        }
+    }
+}
+
+3. pitanje
+
+Kолекције и итератори су веома важан део рада са подацима. Колекције су структуре података које омогућавају складиштење и манипулацију групама објеката, док итератори пружају начин за пролазак кроз елементе тих колекција. Ево неколико примера који илуструју како се користе колекције и итератори у Јави, написано на српском језику.
+
+Пример са листом (ArrayList) и итератором:
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class PrimerListaIIterator {
+    public static void main(String[] args) {
+        // Прављење ArrayList колекције
+        ArrayList<String> lista = new ArrayList<>();
+        
+        // Додавање елемената у листу
+        lista.add("Јабука");
+        lista.add("Банана");
+        lista.add("Наранџа");
+        
+        // Креирање итератора
+        Iterator<String> iterator = lista.iterator();
+        
+        // Пролазак кроз елементе помоћу итератора
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
+    }
+}
+
+Пример са мапом (HashMap) и итератором:
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class PrimerMapaIIterator {
+    public static void main(String[] args) {
+        // Прављење HashMap колекције
+        HashMap<String, Integer> mapa = new HashMap<>();
+        
+        // Додавање елемената у мапу
+        mapa.put("Јабука", 3);
+        mapa.put("Банана", 2);
+        mapa.put("Наранџа", 5);
+        
+        // Добијање скупа уноса (entry set)
+        Set<Map.Entry<String, Integer>> set = mapa.entrySet();
+        
+        // Креирање итератора
+        Iterator<Map.Entry<String, Integer>> iterator = set.iterator();
+        
+        // Пролазак кроз елементе помоћу итератора
+        while (iterator.hasNext()) {
+            Map.Entry<String, Integer> par = iterator.next();
+            System.out.println(par.getKey() + ": " + par.getValue());
+        }
+    }
+}
+
+4. pitanje
+
+Interfejs Collection
+
+Interfejs Collection je osnovni interfejs iz kojeg svi drugi interfejsi u Java kolekcijama nasleđuju. On definiše osnovne operacije koje sve kolekcije treba da implementiraju, kao što su dodavanje, uklanjanje i pretraga elemenata.
+
+Osnovne metode interfejsa Collection:
+
+boolean add(E e): Dodaje element u kolekciju.
+boolean remove(Object o): Uklanja jedan primerak datog elementa iz kolekcije, ako postoji.
+boolean contains(Object o): Vraća true ako kolekcija sadrži dati element.
+int size(): Vraća broj elemenata u kolekciji.
+void clear(): Uklanja sve elemente iz kolekcije.
+boolean isEmpty(): Vraća true ako kolekcija nema elemenata.
+
+Primer korišćenja ArrayList-a:
+
+ArrayList je klasa koja implementira interfejs List, što znači da omogućava rad sa listama koje mogu da se menjaju.
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class PrimerArrayList {
+    public static void main(String[] args) {
+        Collection<String> kolekcija = new ArrayList<>();
+
+        // Dodavanje elemenata u kolekciju
+        kolekcija.add("Jabuka");
+        kolekcija.add("Banana");
+        kolekcija.add("Kruska");
+
+        // Prikazivanje elemenata u kolekciji
+        System.out.println("Kolekcija sadrži: " + kolekcija);
+
+        // Provera da li kolekcija sadrži određeni element
+        boolean sadrziBananu = kolekcija.contains("Banana");
+        System.out.println("Kolekcija sadrži bananu: " + sadrziBananu);
+
+        // Uklanjanje elementa iz kolekcije
+        kolekcija.remove("Banana");
+        System.out.println("Nakon uklanjanja banane, kolekcija sadrži: " + kolekcija);
+
+        // Provera veličine kolekcije
+        int velicina = kolekcija.size();
+        System.out.println("Veličina kolekcije: " + velicina);
+
+        // Provera da li je kolekcija prazna
+        boolean prazna = kolekcija.isEmpty();
+        System.out.println("Da li je kolekcija prazna: " + prazna);
+
+        // Brisanje svih elemenata iz kolekcije
+        kolekcija.clear();
+        System.out.println("Nakon brisanja, kolekcija sadrži: " + kolekcija);
+    }
+}
+
+Primer korišćenja HashSet-a:
+
+HashSet je klasa koja implementira interfejs Set, što znači da ne dozvoljava duplikate i ne garantuje redosled elemenata.
+
+import java.util.Collection;
+import java.util.HashSet;
+
+public class PrimerHashSet {
+    public static void main(String[] args) {
+        Collection<String> kolekcija = new HashSet<>();
+
+        // Dodavanje elemenata u kolekciju
+        kolekcija.add("Pas");
+        kolekcija.add("Mačka");
+        kolekcija.add("Zec");
+        kolekcija.add("Pas"); // Pokušaj dodavanja duplikata
+
+        // Prikazivanje elemenata u kolekciji
+        System.out.println("Kolekcija sadrži: " + kolekcija);
+
+        // Provera da li kolekcija sadrži određeni element
+        boolean sadrziMacku = kolekcija.contains("Mačka");
+        System.out.println("Kolekcija sadrži mačku: " + sadrziMacku);
+
+        // Uklanjanje elementa iz kolekcije
+        kolekcija.remove("Zec");
+        System.out.println("Nakon uklanjanja zeca, kolekcija sadrži: " + kolekcija);
+
+        // Provera veličine kolekcije
+        int velicina = kolekcija.size();
+        System.out.println("Veličina kolekcije: " + velicina);
+
+        // Provera da li je kolekcija prazna
+        boolean prazna = kolekcija.isEmpty();
+        System.out.println("Da li je kolekcija prazna: " + prazna);
+
+        // Brisanje svih elemenata iz kolekcije
+        kolekcija.clear();
+        System.out.println("Nakon brisanja, kolekcija sadrži: " + kolekcija);
+    }
+}
+
+5. pitanje
+
+Interfejs Iterator
+
+Interfejs Iterator se koristi za prolazak kroz elemente kolekcije, jednog po jednog. Omogućava nam da iteriramo kroz kolekciju bez otkrivanja njenog osnovnog prikaza.
+
+Metode interfejsa Iterator:
+
+boolean hasNext(): Vraća true ako postoji sledeći element u iteraciji.
+E next(): Vraća sledeći element u iteraciji.
+void remove(): Uklanja poslednji element koji je vraćen od strane next() metode. (Ova metoda je opciona i može baciti UnsupportedOperationException ako operacija uklanjanja nije podržana.)
+
+Primer
+Evo jednostavnog primera koji demonstrira korišćenje Iterator interfejsa sa listom:
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorPrimer {
+    public static void main(String[] args) {
+        // Kreiranje liste i dodavanje elemenata
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Element 1");
+        lista.add("Element 2");
+        lista.add("Element 3");
+
+        // Dobijanje iteratora za listu
+        Iterator<String> iterator = lista.iterator();
+
+        // Iteriranje kroz listu koristeći iterator
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
+    }
+}
+
+Uklanjanje elemenata tokom iteracije
+
+Takođe možemo uklanjati elemente iz kolekcije tokom iteracije. Evo primera kako se to radi:
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorPrimerSaUklanjanjem {
+    public static void main(String[] args) {
+        // Kreiranje liste i dodavanje elemenata
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Element 1");
+        lista.add("Element 2");
+        lista.add("Element 3");
+
+        // Dobijanje iteratora za listu
+        Iterator<String> iterator = lista.iterator();
+
+        // Iteriranje kroz listu koristeći iterator
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            if (element.equals("Element 2")) {
+                iterator.remove(); // Uklanja trenutni element
+            }
+        }
+
+        // Prikazivanje liste nakon uklanjanja
+        for (String element : lista) {
+            System.out.println(element);
+        }
+    }
+}
+
+6. pitanje
+
+U Javi, interfejs Iterable omogućava objektima da budu ciljani pomoću "for-each" petlje, poznate kao "kolokvijalna for petlja". Evo kako to funkcioniše sa primerima:
+
+Definicija interfejsa Iterable
+
+Interfejs Iterable je deo java.lang paketa i ima samo jednu metodu koju je neophodno implementirati: iterator(). Ova metoda vraća instancu interfejsa Iterator.
+
+Primer: Upotreba ugrađene Java kolekcije
+
+Java pruža mnogo ugrađenih kolekcija koje već implementiraju Iterable, kao što su ArrayList, HashSet, itd.
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Prvi");
+        lista.add("Drugi");
+        lista.add("Treci");
+
+        for (String element : lista) {
+            System.out.println(element);
+        }
+    }
+}
+
+U ovom primeru, koristimo ArrayList koji već implementira Iterable interfejs, omogućavajući jednostavno iteriranje kroz elemente pomoću kolokvijalne for petlje.
+
+7. pitanje
+
+Ovde je primer Java koda koji demonstrira операције над колекцијом коришћењем итератора:
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        // Kreiramo listu brojeva
+        List<Integer> brojevi = new ArrayList<>();
+        brojevi.add(1);
+        brojevi.add(2);
+        brojevi.add(3);
+        brojevi.add(4);
+        brojevi.add(5);
+
+        // Koristimo iterator za prolazak kroz kolekciju
+        Iterator<Integer> iterator = brojevi.iterator();
+
+        // Ispisujemo elemente liste koristeći iterator
+        System.out.println("Elementi liste:");
+        while (iterator.hasNext()) {
+            Integer broj = iterator.next();
+            System.out.println(broj);
+        }
+
+        // Ponovno dobijamo iterator kako bismo obrisali parne brojeve
+        iterator = brojevi.iterator();
+        while (iterator.hasNext()) {
+            Integer broj = iterator.next();
+            if (broj % 2 == 0) {
+                iterator.remove();
+            }
+        }
+
+        // Ispisujemo elemente liste nakon brisanja parnih brojeva
+        System.out.println("Elementi liste nakon brisanja parnih brojeva:");
+        for (Integer broj : brojevi) {
+            System.out.println(broj);
+        }
+    }
+}
+
+Објашњење кода:
+
+1. Креирање колекције:
+Направили смо ArrayList целих бројева и додали неке елементе у њу.
+
+2. Користимо итератор:
+Добијамо итератор за листу коришћењем iterator() методе.
+Пролазимо кроз елементе листе и исписујемо их.
+
+3. Брисање елемената коришћењем итератора:
+Поново добијамо итератор и пролазимо кроз елементе листе.
+Ако је бројпаран (broj % 2 == 0), бришемо га из листе користећи remove() метод итератора.
+
+4. Исписивање финалне листе:
+Користимо for-each петљу да бисмо исписали елементе листе након што смо обрисали парне бројеве.
+
+Ово је основни пример коришћења итератора за пролазак кроз колекцију и измену исте у Јави.
+
+8. pitanje
+
+Primer 1: Kreiranje liste i dodavanje elemenata
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrimerListe {
+    public static void main(String[] args) {
+        // Kreiramo novu ArrayList instancu koja implementira List interfejs
+        List<String> lista = new ArrayList<>();
+
+        // Dodajemo elemente u listu
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Kruška");
+
+        // Ispisujemo elemente liste
+        System.out.println("Elementi liste: " + lista);
+    }
+}
+
+Primer 2: Iteracija kroz listu
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class IteracijaListe {
+    public static void main(String[] args) {
+        // Kreiramo i popunjavamo listu
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Kruška");
+
+        // Iteriramo kroz listu koristeći for-each petlju
+        for (String voće : lista) {
+            System.out.println(voće);
+        }
+    }
+}
+
+Primer 3: Uklanjanje elemenata iz liste
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UklanjanjeIzListe {
+    public static void main(String[] args) {
+        // Kreiramo i popunjavamo listu
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Kruška");
+
+        // Uklanjamo element "Banana" iz liste
+        lista.remove("Banana");
+
+        // Ispisujemo elemente liste nakon uklanjanja
+        System.out.println("Elementi liste nakon uklanjanja: " + lista);
+    }
+}
+
+Primer 4: Pronalaženje elementa u listi
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PronalaženjeElementa {
+    public static void main(String[] args) {
+        // Kreiramo i popunjavamo listu
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Kruška");
+
+        // Pronalaženje elementa u listi
+        String traženoVoće = "Kruška";
+        if (lista.contains(traženoVoće)) {
+            System.out.println(traženoVoće + " je pronađena u listi.");
+        } else {
+            System.out.println(traženoVoće + " nije pronađena u listi.");
+        }
+    }
+}
+
+Primer 5: Sortiranje liste
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class SortiranjeListe {
+    public static void main(String[] args) {
+        // Kreiramo i popunjavamo listu
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Kruška");
+
+        // Sortiramo listu
+        Collections.sort(lista);
+
+        // Ispisujemo sortiranu listu
+        System.out.println("Sortirana lista: " + lista);
+    }
+}
+
+9. pitanje
+
+ListIterator je poseban tip iteratora u Javi koji omogućava iteraciju kroz listu u oba smera. On takođe omogućava modifikaciju liste tokom iteracije. Evo kako se koristi ListIterator u Javi sa primerima na srpskom jeziku:
+
+Primer 1: Iteracija kroz listu unapred i unazad
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ListIteratorPrimer {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Trešnja");
+
+        // Kreiramo ListIterator
+        ListIterator<String> listIterator = lista.listIterator();
+
+        // Iteracija unapred
+        System.out.println("Iteracija unapred:");
+        while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+
+        // Iteracija unazad
+        System.out.println("Iteracija unazad:");
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
+    }
+}
+
+Primer 2: Modifikacija elemenata liste tokom iteracije
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ListIteratorModifikacija {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Trešnja");
+
+        // Kreiramo ListIterator
+        ListIterator<String> listIterator = lista.listIterator();
+
+        // Zamena elemenata tokom iteracije
+        while (listIterator.hasNext()) {
+            String voće = listIterator.next();
+            if (voće.equals("Banana")) {
+                listIterator.set("Kivi");
+            }
+        }
+
+        // Ispis modifikovane liste
+        System.out.println("Modifikovana lista:");
+        for (String voće : lista) {
+            System.out.println(voće);
+        }
+    }
+}
+
+Primer 3: Dodavanje i uklanjanje elemenata tokom iteracije
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ListIteratorDodavanjeUklanjanje {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Jabuka");
+        lista.add("Banana");
+        lista.add("Trešnja");
+
+        // Kreiramo ListIterator
+        ListIterator<String> listIterator = lista.listIterator();
+
+        // Dodavanje elemenata tokom iteracije
+        while (listIterator.hasNext()) {
+            String voće = listIterator.next();
+            if (voće.equals("Banana")) {
+                listIterator.add("Narandža");
+            }
+        }
+
+        // Uklanjanje elemenata tokom iteracije
+        listIterator = lista.listIterator(); // Resetovanje iteratora
+        while (listIterator.hasNext()) {
+            String voće = listIterator.next();
+            if (voće.equals("Trešnja")) {
+                listIterator.remove();
+            }
+        }
+
+        // Ispis modifikovane liste
+        System.out.println("Modifikovana lista:");
+        for (String voće : lista) {
+            System.out.println(voće);
+        }
+    }
+}
+
+10. pitanje
+
+U Javi, Set je interfejs koji je deo Java Collections Framework-a. Set interfejs predstavlja skup elemenata koji ne dozvoljava duplikate. Postoji nekoliko implementacija Set interfejsa kao što su HashSet, LinkedHashSet, i TreeSet.
+
+Evo primera kako koristiti Set interfejs u Javi:
+
+1. HashSet - Koristi heš tabelu za skladištenje elemenata. Redosled elemenata nije garantovan.
+
+2. LinkedHashSet - Zadržava redosled umetanja elemenata.
+
+3. TreeSet - Sortira elemente u prirodnom redosledu ili prema zadatom komparatoru.
+
+Primer korišćenja HashSet-a
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class PrimerSet {
+    public static void main(String[] args) {
+        // Kreiranje HashSet-a
+        Set<String> skup = new HashSet<>();
+
+        // Dodavanje elemenata u skup
+        skup.add("Jabuka");
+        skup.add("Banana");
+        skup.add("Pomorandža");
+        skup.add("Kivi");
+        skup.add("Banana"); // Ovaj element neće biti dodat jer HashSet ne dozvoljava duplikate
+
+        // Ispis elemenata skupa
+        System.out.println("Elementi skupa: " + skup);
+
+        // Provera da li skup sadrži određeni element
+        if (skup.contains("Jabuka")) {
+            System.out.println("Skup sadrži Jabuku");
+        }
+
+        // Uklanjanje elementa iz skupa
+        skup.remove("Kivi");
+        System.out.println("Nakon uklanjanja, elementi skupa: " + skup);
+    }
+}
+
+Primer korišćenja LinkedHashSet-a
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class PrimerLinkedHashSet {
+    public static void main(String[] args) {
+        // Kreiranje LinkedHashSet-a
+        Set<String> skup = new LinkedHashSet<>();
+
+        // Dodavanje elemenata u skup
+        skup.add("Jabuka");
+        skup.add("Banana");
+        skup.add("Pomorandža");
+        skup.add("Kivi");
+
+        // Ispis elemenata skupa (redosled umetanja je očuvan)
+        System.out.println("Elementi skupa: " + skup);
+    }
+}
+
+Primer korišćenja TreeSet-a
+
+import java.util.Set;
+import java.util.TreeSet;
+
+public class PrimerTreeSet {
+    public static void main(String[] args) {
+        // Kreiranje TreeSet-a
+        Set<String> skup = new TreeSet<>();
+
+        // Dodavanje elemenata u skup
+        skup.add("Jabuka");
+        skup.add("Banana");
+        skup.add("Pomorandža");
+        skup.add("Kivi");
+
+        // Ispis elemenata skupa (sortirani redosled)
+        System.out.println("Elementi skupa: " + skup);
+    }
+}
+
+11. pitanje
+
+Evo jednostavnog primera уређивања и манипулације колекцијом у Јави. Пример користи класу ArrayList за креирање и манипулацију списком (листа) целих бројева.
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class UredjenjeKolekcije {
+
+    public static void main(String[] args) {
+        // Kreiranje nove ArrayList kolekcije
+        ArrayList<Integer> brojevi = new ArrayList<>();
+
+        // Dodavanje elemenata u kolekciju
+        brojevi.add(5);
+        brojevi.add(3);
+        brojevi.add(8);
+        brojevi.add(1);
+        brojevi.add(9);
+
+        // Prikazivanje elemenata pre sortiranja
+        System.out.println("Elementi pre sortiranja: " + brojevi);
+
+        // Sortiranje kolekcije
+        Collections.sort(brojevi);
+
+        // Prikazivanje elemenata posle sortiranja
+        System.out.println("Elementi posle sortiranja: " + brojevi);
+
+        // Uklanjanje elementa iz kolekcije
+        brojevi.remove(2); // Uklanjanje elementa na indeksu 2
+
+        // Prikazivanje elemenata posle uklanjanja
+        System.out.println("Elementi posle uklanjanja: " + brojevi);
+
+        // Provera da li kolekcija sadrži određeni element
+        boolean sadrzi = brojevi.contains(3);
+        System.out.println("Da li kolekcija sadrži broj 3? " + sadrzi);
+
+        // Prikazivanje veličine kolekcije
+        int velicina = brojevi.size();
+        System.out.println("Veličina kolekcije: " + velicina);
+    }
+}
+
+12. pitanje
+
+Evo primera klase SortedSet u Javi na srpskom jeziku. Koristićemo interfejs SortedSet iz Java kolekcija da demonstriramo kako se može koristiti za sortirani skup.
+ 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class PrimerSortedSet {
+    public static void main(String[] args) {
+        // Kreiranje sortiranog skupa koristeći TreeSet
+        SortedSet<String> sortiraniSkup = new TreeSet<>();
+
+        // Dodavanje elemenata u sortirani skup
+        sortiraniSkup.add("Jabuka");
+        sortiraniSkup.add("Kruška");
+        sortiraniSkup.add("Banana");
+        sortiraniSkup.add("Pomorandža");
+
+        // Prikazivanje elemenata sortiranog skupa
+        System.out.println("Elementi sortiranog skupa: " + sortiraniSkup);
+
+        // Prikazivanje prvog i poslednjeg elementa
+        System.out.println("Prvi element: " + sortiraniSkup.first());
+        System.out.println("Poslednji element: " + sortiraniSkup.last());
+
+        // Podskup od (inclusive) do (exclusive)
+        SortedSet<String> podskup = sortiraniSkup.subSet("Banana", "Pomorandža");
+        System.out.println("Podskup (Banana do Pomorandža): " + podskup);
+
+        // Glava skupa (svi elementi manji od datog)
+        SortedSet<String> glavaSkupa = sortiraniSkup.headSet("Kruška");
+        System.out.println("Glava skupa (manji od Kruška): " + glavaSkupa);
+
+        // Rep skupa (svi elementi veći ili jednaki datom)
+        SortedSet<String> repSkupa = sortiraniSkup.tailSet("Kruška");
+        System.out.println("Rep skupa (Kruška i veći): " + repSkupa);
+    }
+}
+
+SortedSet je interfejs u Javi koji predstavlja kolekciju elemenata organizovanu prema njihovom prirodnom redosledu ili po specifičnom kriterijumu koji se može definisati prilikom kreiranja objekta koji implementira ovaj interfejs. Evo ključnih tačaka o SortedSet:
+
+Sortiranje elemenata: Glavna karakteristika SortedSet-a je da održava svoje elemente u sortiranom redosledu. Ovo se postiže korišćenjem prirodnog redosleda elemenata (ukoliko elementi implementiraju Comparable interfejs) ili pomoću objekta Comparator koji se može proslediti prilikom inicijalizacije.
+
+Nedupliranje elemenata: Baš kao i Set, SortedSet ne dozvoljava dupliranje elemenata. Svaki element može biti prisutan najviše jednom u skupu.
+
+Metode za navigaciju: SortedSet nudi nekoliko korisnih metoda za navigaciju kroz skup, kao što su:
+
+1. first(): Vraća prvi (najmanji) element u skupu.
+
+2. last(): Vraća poslednji (najveći) element u skupu.
+
+3. subSet(fromElement, toElement): Vraća podskup elemenata koji su između fromElement (uključivo) i toElement (isključivo).
+
+4. headSet(toElement): Vraća podskup elemenata koji su manji od toElement.
+
+5. tailSet(fromElement): Vraća podskup elemenata koji su veći ili jednaki fromElement.
+
+Implementacije SortedSet-a: U Javi postoje nekoliko implementacija SortedSet-a. Najčešće korišćena je TreeSet, koja koristi binarno stablo za efikasno održavanje sortiranog redosleda elemenata. Osim TreeSet-a, moguće je implementirati SortedSet i korišćenjem drugih struktura podataka ili korišćenjem prilagođenih implementacija koje zadovoljavaju SortedSet interfejs.
+
+Efikasnost operacija: Operacije nad SortedSet-om su obično efikasne, npr. dodavanje, uklanjanje i pretraga elemenata, zahvaljujući internoj strukturi (npr. binarno stablo u slučaju TreeSet-a), što omogućava logaritamsku složenost (O(log n)) za većinu operacija.
+
+13. pitanje
+
+Šta je Queue (Red)?
+
+Red (Queue) je struktura podataka koja funkcioniše po principu FIFO (First-In-First-Out), što znači da elementi koji se dodaju u red ostaju u istom redosledu dok se ne uklone. Element koji je prvi dodat u red je prvi koji će biti uklonjen.
+
+Primer implementacije Queue u Javi
+
+Evo jednostavnog primera kako možeš da implementiraš red koristeći Java kolekcije, kao što je LinkedList:
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) {
+        // Kreiranje reda koristeći LinkedList
+        Queue<String> red = new LinkedList<>();
+
+        // Dodavanje elemenata u red
+        red.offer("Element 1");
+        red.offer("Element 2");
+        red.offer("Element 3");
+
+        // Prikaz prvog elementa u redu (bez uklanjanja)
+        System.out.println("Prvi element u redu: " + red.peek());
+
+        // Uklanjanje i prikaz svakog elementa iz reda
+        while (!red.isEmpty()) {
+            System.out.println("Uklonjen element: " + red.poll());
+        }
+    }
+}
+
+Objašnjenje primera
+
+1. Importovanje klasa: Koristimo LinkedList iz java.util za implementaciju reda.
+
+2. Kreiranje reda: Queue<String> red = new LinkedList<>(); definiše red koji može da sadrži stringove.
+
+3. Dodavanje elemenata: red.offer("Element 1"); dodaje element "Element 1" u red. offer se koristi za dodavanje.
+
+4. Prikaz prvog elementa: red.peek() prikazuje prvi element u redu bez uklanjanja.
+
+5. Uklanjanje elemenata: red.poll() uklanja i vraća prvi element u redu. Povratna vrednost je null ako je red prazan.
+
+Red je koristan kada želimo da pratimo redosled događaja ili za obradu elemenata u redosledu u kojem su stigli. Koristi se u širokom spektru aplikacija, kao što su simulacije, algoritmi za pretraživanje, upravljanje resursima itd.
+
+14. pitanje
+
+Deque (Double Ended Queue) u jeziku Java je struktura podataka koja omogućava brz i efikasan pristup elementima sa oba kraja reda. U Java standardnoj biblioteci, deque je implementiran kroz interfejs Deque koji definiše metode za manipulaciju ovom strukturom.
+
+Evo primera kako možeš da koristiš Deque u Javi:
+
+import java.util.*;
+
+public class PrimerDeque {
+    public static void main(String[] args) {
+        Deque<String> deque = new LinkedList<>();
+
+        // Dodavanje elemenata na početak i kraj deque-a
+        deque.addFirst("Element1");
+        deque.addLast("Element2");
+        deque.addFirst("Element3");
+
+        System.out.println("Sadržaj deque-a: " + deque);
+
+        // Uklanjanje elementa sa početka i kraja deque-a
+        String firstElement = deque.removeFirst();
+        String lastElement = deque.removeLast();
+
+        System.out.println("Uklonjeni elementi: " + firstElement + ", " + lastElement);
+        System.out.println("Preostali sadržaj deque-a: " + deque);
+
+        // Pristupanje elementima bez uklanjanja
+        String peekFirst = deque.peekFirst();
+        String peekLast = deque.peekLast();
+
+        System.out.println("Prvi element (bez uklanjanja): " + peekFirst);
+        System.out.println("Poslednji element (bez uklanjanja): " + peekLast);
+    }
+}
+
+Operacije:
+
+1. addFirst(element) i addLast(element): Dodaju element na početak odnosno kraj deque-a.
+
+2. removeFirst() i removeLast(): Uklanjaju i vraćaju element sa početka odnosno kraja deque-a.
+
+3. peekFirst() i peekLast(): Vraćaju prvi odnosno poslednji element bez uklanjanja.
+
+Efikasnost: Operacije dodavanja i uklanjanja sa početka i kraja deque-a su obično konstantne složenosti O(1), što ga čini brzim za ove operacije.
+
+Primena: Deque je koristan kada je potrebno podržati operacije dodavanja i uklanjanja sa oba kraja. Na primer, može se koristiti u algoritmima koji zahtevaju obradu podataka u oba smera ili kada je redosled pristupa važan.
+
+15. pitanje
+
+Interfejs RandomAccess u jeziku Java predstavlja poseban interfejs koji ne sadrži metode, već se koristi kao oznaka. Ovaj interfejs označava da implementirajuća klasa podržava "random access" operacije nad podacima, što znači da se elementi mogu efikasno pristupati nasumično (direktno po indeksu), bez potrebe za sekvenциалnim prolaskom kroz strukturu podataka.
+
+Evo kako bismo definisali interfejs RandomAccess u Java jeziku:
+
+public interface RandomAccess {
+    // Ovaj interfejs ne definiše nikakve metode, već samo označava da je klasa koja ga implementira sposobna za random access operacije.
+}
+
+Teorijsko objašnjenje:
+
+1. Random Access (Nasumični pristup): U kontekstu struktura podataka, nasumični pristup podrazumeva mogućnost direktnog pristupa elementu podataka na osnovu njegovog indeksa ili ključa. Ovo je suprotno od sekvenциalnog pristupa, gde se elementi moraju dohvatati jedan po jedan po redosledu.
+
+2. Struktura podataka: Klasa koja implementira RandomAccess obično koristi podatke organizovane na način koji omogućava brz pristup elementima. Na primer, niz (array) u Javi je struktura koja podržava nasumični pristup jer se elementi mogu direktno dohvatiti pomoću indeksa. Nasuprot tome, linked lista nije optimalna za nasumični pristup jer zahteva prolazak kroz svaki prethodni element kako bi se došlo do željenog.
+
+3. Efikasnost: Korišćenje interfejsa RandomAccess je korisno kada želimo da osiguramo da je neka klasa efikasna za operacije koje zahtevaju brzi pristup podacima po indeksu. Mnogi algoritmi i strukture podataka, kao što su nizovi (ArrayList u Javi), automatski implementiraju RandomAccess interfejs kako bi se naglasilo da podržavaju brzi pristup.
+
+Primer:
+Evo kako bi izgledalo korišćenje RandomAccess interfejsa u praksi:
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Jedan");
+        lista.add("Dva");
+        lista.add("Tri");
+
+        // Provera da li lista podržava RandomAccess
+        if (lista instanceof RandomAccess) {
+            System.out.println("Lista podržava RandomAccess.");
+        } else {
+            System.out.println("Lista ne podržava RandomAccess.");
+        }
+    }
+}
+
+16. pitanje
+
+Evo jednog primera implementacije povezane liste (LinkedList) u Java jeziku, zajedno sa teorijskim objašnjenjem i strukturom.
+
+Teorijsko objašnjenje
+Povezana lista je linearna struktura podataka u kojoj su elementi (čvorovi) povezani pokazivačima ili referencama. Svaki čvor sadrži podatak i pokazivač na sledeći čvor u listi. Glavna prednost povezanih listi je dinamičko alociranje memorije za elemente, što omogućava efikasno dodavanje i uklanjanje elemenata.
+
+Primer korišćenja
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList lista = new LinkedList();
+
+        lista.addLast(1);
+        lista.addLast(2);
+        lista.addLast(3);
+
+        System.out.println("Elementi liste su:");
+        lista.printList();
+
+        lista.addFirst(0);
+        System.out.println("Elementi liste nakon dodavanja na početak:");
+        lista.printList();
+
+        lista.removeFirst();
+        System.out.println("Elementi liste nakon uklanjanja prvog elementa:");
+        lista.printList();
+
+        lista.removeLast();
+        System.out.println("Elementi liste nakon uklanjanja poslednjeg elementa:");
+        lista.printList();
+
+        int trazeniElement = 2;
+        if (lista.contains(trazeniElement)) {
+            System.out.println("Lista sadrži element " + trazeniElement);
+        } else {
+            System.out.println("Lista ne sadrži element " + trazeniElement);
+        }
+
+        lista.clear();
+        System.out.println("Elementi liste nakon brisanja cele liste:");
+        lista.printList();
+    }
+}
+
+17. pitanje
+
+U redu, evo kako bi izgledao primer koda u Javi koji koristi klasu ArrayList za rad sa nizovima (nizovima objekata) zajedno sa teorijskim objašnjenjem strukture:
+
+Primer koda u Javi sa ArrayList-om
+
+import java.util.ArrayList;
+
+public class PrimerArrayListe {
+
+    public static void main(String[] args) {
+        // Kreiranje ArrayListe za celobrojne vrednosti
+        ArrayList<Integer> listaBrojeva = new ArrayList<>();
+
+        // Dodavanje elemenata u listu
+        listaBrojeva.add(10);
+        listaBrojeva.add(20);
+        listaBrojeva.add(30);
+
+        // Prikaz elemenata liste
+        System.out.println("Elementi liste:");
+        for (int i = 0; i < listaBrojeva.size(); i++) {
+            System.out.println(listaBrojeva.get(i));
+        }
+
+        // Brisanje elementa iz liste
+        listaBrojeva.remove(1); // Uklanja drugi element (indeks 1)
+
+        // Prikaz izmenjene liste
+        System.out.println("Nakon brisanja:");
+        for (int broj : listaBrojeva) {
+            System.out.println(broj);
+        }
+    }
+}
+
+18. pitanje
+
+HashSet u Javi je klasa koja implementira Set interfejs i koristi hash tabele za skladištenje elemenata. Evo kako se koristi HashSet u Javi zajedno sa objašnjenjem:
+
+Primeri korišćenja HashSet-a u Javi
+
+Dodavanje i Uklanjanje Elemenata:
+
+import java.util.HashSet;
+
+public class PrimerHashSet {
+    public static void main(String[] args) {
+        // Kreiranje HashSet objekta
+        HashSet<String> set = new HashSet<>();
+
+        // Dodavanje elemenata u skup
+        set.add("jabuka");
+        set.add("banana");
+        set.add("kivi");
+
+        // Ispisuje: [banana, jabuka, kivi] - redosled nije garantovan
+        System.out.println(set);
+
+        // Uklanjanje elementa
+        set.remove("banana");
+
+        // Ispisuje: [jabuka, kivi]
+        System.out.println(set);
+    }
+}
+
+Provera Postojanja Elementa:
+
+import java.util.HashSet;
+
+public class ProveraHashSet {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+        set.add("jabuka");
+        set.add("banana");
+        set.add("kivi");
+
+        // Provera postojanja elementa
+        boolean sadrziBanana = set.contains("banana");
+        boolean sadrziNarandza = set.contains("narandža");
+
+        System.out.println("Da li set sadrži bananu? " + sadrziBanana); // Ispisuje: true
+        System.out.println("Da li set sadrži narandžu? " + sadrziNarandza); // Ispisuje: false
+    }
+}
+
+Teorijsko objašnjenje HashSet-a
+HashSet koristi hash tabele za implementaciju. Ključne karakteristike HashSet-a su:
+
+1. Jedinstveni Elementi: HashSet ne dozvoljava duplikate. Ako pokušate da dodate isti element više puta, on će biti zadržan samo jednom.
+
+2. Performanse: Dodavanje, uklanjanje i provera postojanja elementa u HashSet-u imaju prosečnu vremensku složenost O(1), što znači da su brze. Međutim, ova složenost se može promeniti u najgorem slučaju zbog kolizija.
+
+3. Neredosled: Elementi u HashSet-u se ne čuvaju u određenom redosledu. Redosled elemenata može se promeniti prilikom iteracije kroz skup.
+
+HashSet koristi hash funkciju za mapiranje elemenata na njihove pozicije u unutrašnjoj hash tabli. Kada se traži element, hash tablica omogućava brzu pretragu lokacije elementa, što čini HashSet efikasnim za upotrebu kod operacija sa skupom u Java programima.
+
+19. pitanje
+
+TreeSet u Javi je implementacija Set kolekcije koja koristi drvo za skladištenje elemenata. Specifično, koristi crveno-crno stablo koje omogućava brzo pronalaženje, dodavanje i uklanjanje elemenata, kao i automatsko sortiranje elemenata prema njihovom prirodnom redosledu ili redosledu koji definira korisnik (pomoću Comparator objekta).
+
+Evo jednostavnog primera kako se koristi TreeSet u Javi:
+
+import java.util.*;
+
+public class PrimerTreeSet {
+    public static void main(String[] args) {
+        // Kreiranje TreeSet instance za skladištenje stringova
+        TreeSet<String> set = new TreeSet<>();
+
+        // Dodavanje elemenata u TreeSet
+        set.add("banana");
+        set.add("jabuka");
+        set.add("kivi");
+        set.add("banana"); // duplikati nisu dozvoljeni, ovaj se neće dodati
+
+        // Ispis elemenata TreeSet-a
+        System.out.println("Elementi TreeSet-a su: " + set);
+
+        // Uklanjanje elementa
+        set.remove("kivi");
+
+        // Ispis nakon uklanjanja
+        System.out.println("Nakon uklanjanja kivija: " + set);
+    }
+}
+
+Teorijsko objašnjenje:
+
+Sortiranje: TreeSet automatski sortira elemente. Ako se koriste elementi koji implementiraju Comparable interfejs (ili ako se koristi Comparator), elementi će biti sortirani prema prirodnom redosledu ili redosledu definisanom Comparator-om.
+
+1. Jedinstveni elementi: TreeSet ne dozvoljava duplikate. Pokušaji dodavanja duplikata neće promeniti sadržaj TreeSet-a.
+
+2. Brzina operacija: Operacije dodavanja, uklanjanja i pretrage (kao što je contains) su efikasne. Vreme izvršavanja ovih operacija je logaritamsko u odnosu na broj elemenata u TreeSet-u.
+
+3. Interfejsi: Implementira NavigableSet interfejs koji pruža dodatne metode za navigaciju kroz skup, poput higher, lower, ceiling, floor itd.
+
+4. Implementacija: Unutrašnja struktura podataka je crveno-crno stablo, što osigurava balansiranje stabla i efikasne operacije upravljanja skupom.
+
+Koristeći TreeSet, možete efikasno raditi sa skupom podataka koji treba da budu sortirani i brzo dostupni za pretragu, kao i da sadrže jedinstvene elemente
+
+20. pitanje
+
+Теоријско објашњење ArrayDeque класе
+
+ArrayDeque је класа у Javi која представља двоструко повезану листу (deque - double-ended queue) имплементирану преко динамичког низа. Ова структура података омогућава додавање и уклањање елемената са обе стране (почетак и крај) са амортизованом константном временском сложеношћу.
+
+Карактеристике ArrayDeque класе:
+1. Двоструко повезана листа: Омогућава ефикасно додавање и уклањање елемената на оба краја.
+
+2. Нема ограничења величине: Аутоматски се проширује по потреби.
+
+3. Не дозвољава null елементе: Бацити NullPointerException ако покушате да додате null.
+
+4. Брз приступ елементима: Операције приступа (додавање и уклањање) на оба краја су брзе.
+
+Основни методи:
+
+Додавање елемената:
+
+void addFirst(E e): Додаје елемент e на почетак deque-а.
+
+void addLast(E e): Додаје елемент e на крај deque-а.
+
+boolean offerFirst(E e): Понудити елемент e на почетак deque-а.
+
+boolean offerLast(E e): Понудити елемент e на крај deque-а.
+
+Уклањање елемената:
+
+E removeFirst(): Уклања и враћа први елемент deque-а.
+
+E removeLast(): Уклања и враћа задњи елемент deque-а.
+
+E pollFirst(): Уклања и враћа први елемент deque-а, или враћа null ако је deque празан.
+
+E pollLast(): Уклања и враћа задњи елемент deque-а, или враћа null ако је deque празан.
+
+Провера и приступ елементима:
+
+E getFirst(): Враћа први елемент deque-а без уклањања.
+
+E getLast(): Враћа задњи елемент deque-а без уклањања.
+
+E peekFirst(): Враћа први елемент deque-а, или null ако је празан.
+
+E peekLast(): Враћа задњи елемент deque-а, или null ако је празан.
+
+Додавање и уклањање елемената као стек:
+
+void push(E e): Додаје елемент на врх стека.
+
+E pop(): Уклања и враћа елемент са врха стека.
+
+Остали методи:
+
+boolean isEmpty(): Проверава да ли је deque празан.
+
+int size(): Враћа број елемената у deque-у.
+
+void clear(): Уклања све елементе из deque-а.
+
+boolean contains(Object o): Проверава да ли deque садржи одређени елемент.
+
+Iterator<E> iterator(): Враћа итератор за елементе deque-а.
+
+Iterator<E> descendingIterator(): Враћа итератор који итерира елементе у обрнутом редоследу.
+
+Примери коришћења
+
+import java.util.ArrayDeque;
+
+public class ArrayDequePrimer {
+    public static void main(String[] args) {
+        ArrayDeque<String> deque = new ArrayDeque<>();
+
+        // Додавање елемената
+        deque.addFirst("Први");
+        deque.addLast("Други");
+
+        // Приступ елементима
+        System.out.println("Први елемент: " + deque.getFirst());
+        System.out.println("Задњи елемент: " + deque.getLast());
+
+        // Уклањање елемената
+        System.out.println("Уклањам први: " + deque.removeFirst());
+        System.out.println("Уклањам задњи: " + deque.removeLast());
+
+        // Коришћење као стек
+        deque.push("Трећи");
+        System.out.println("Уклањам са врха стека: " + deque.pop());
+
+        // Додавање и понуда
+        deque.offerFirst("Четврти");
+        deque.offerLast("Пети");
+        System.out.println("Понуда првог: " + deque.pollFirst());
+        System.out.println("Понуда задњег: " + deque.pollLast());
+    }
+}
+
+21. pitanje
+
+Kolekcije u Javi su veoma moćan alat za upravljanje grupama objekata. Klasa Collections iz Jave pruža različite metode koje olakšavaju rad sa kolekcijama kao što su liste, skupovi i mape. Ove metode su korisne za sortiranje, pretraživanje i menjanje elemenata u kolekcijama. U nastavku su teorijska objašnjenja i primeri nekih od najčešće korišćenih metoda iz klase Collections.
+
+Metoda sort
+Metoda sort sortira elemente u listi u rastućem redosledu. Može se koristiti sa zadatim prirodnim redosledom ili sa Comparator objektom za prilagođeno sortiranje.
+
+import java.util.*;
+
+public class PrimerSort {
+    public static void main(String[] args) {
+        List<Integer> brojevi = Arrays.asList(5, 3, 8, 1, 9);
+        Collections.sort(brojevi);
+        System.out.println("Sortirana lista: " + brojevi);
+
+        // Sortiranje po prilagođenom comparator-u
+        Collections.sort(brojevi, Collections.reverseOrder());
+        System.out.println("Sortirana lista u opadajućem redosledu: " + brojevi);
+    }
+}
+
+Metoda reverse
+Metoda reverse obrće redosled elemenata u listi.
+
+import java.util.*;
+
+public class PrimerReverse {
+    public static void main(String[] args) {
+        List<String> imena = Arrays.asList("Ana", "Marko", "Ivana");
+        Collections.reverse(imena);
+        System.out.println("Obrnuta lista: " + imena);
+    }
+}
+
+Metoda min i max
+Metode min i max vraćaju najmanji, odnosno najveći element u kolekciji prema prirodnom redosledu ili prema zadatom comparator-u.
+
+import java.util.*;
+
+public class PrimerMinMax {
+    public static void main(String[] args) {
+        List<Integer> brojevi = Arrays.asList(2, 3, 7, 1, 4);
+        int minBroj = Collections.min(brojevi);
+        int maxBroj = Collections.max(brojevi);
+        System.out.println("Najmanji broj: " + minBroj);
+        System.out.println("Najveći broj: " + maxBroj);
+    }
+}
+
+Metoda copy
+Metoda copy kopira elemente iz jedne liste u drugu. Ciljna lista mora biti iste veličine kao i izvorna lista
+
+import java.util.*;
+
+public class PrimerCopy {
+    public static void main(String[] args) {
+        List<String> originalnaLista = Arrays.asList("A", "B", "C");
+        List<String> kopiranaLista = new ArrayList<>(Arrays.asList(new String[originalnaLista.size()]));
+        Collections.copy(kopiranaLista, originalnaLista);
+        System.out.println("Kopirana lista: " + kopiranaLista);
+    }
+}
+
+22. pitanje
+
+Map interfejs u Javi predstavlja strukturu podataka koja mapira ključeve na vrednosti. To znači da svaki ključ mapira tačno jednu vrednost. Map interfejs ne dozvoljava dupliranje ključeva; međutim, dozvoljava dupliranje vrednosti.
+
+Ključne karakteristike Map interfejsa:
+
+1. Ključevi su jedinstveni: Svaki ključ može da bude mapiran samo na jednu vrednost.
+
+2. Vrednosti mogu biti duplirane: Više različitih ključeva može da mapira na istu vrednost.
+
+3. Implementacije Map interfejsa: Neke od poznatih klasa koje implementiraju Map interfejs su HashMap, TreeMap, LinkedHashMap, i Hashtable.
+
+Važni metodi Map interfejsa:
+
+1. put(K key, V value): Dodaje par ključ-vrednost u mapu. Ako ključ već postoji, vrednost će biti ažurirana.
+
+2. get(Object key): Vraća vrednost koja je mapirana na dati ključ, ili null ako ključ ne postoji.
+
+3. remove(Object key): Uklanja par ključ-vrednost iz mape na osnovu ključa.
+
+4. containsKey(Object key): Proverava da li mapa sadrži dati ključ.
+
+5. containsValue(Object value): Proverava da li mapa sadrži datu vrednost.
+
+6. size(): Vraća broj parova ključ-vrednost u mapi.
+
+7. isEmpty(): Proverava da li je mapa prazna.
+
+8. keySet(): Vraća skup svih ključeva u mapi.
+
+9. values(): Vraća kolekciju svih vrednosti u mapi.
+
+10. entrySet(): Vraća skup svih unosa (parova ključ-vrednost) u mapi.
+
+Primer korišćenja Map interfejsa:
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapPrimer {
+    public static void main(String[] args) {
+        // Kreiranje HashMap objekta
+        Map<String, Integer> oceneStudenata = new HashMap<>();
+
+        // Dodavanje parova ključ-vrednost
+        oceneStudenata.put("Ana", 90);
+        oceneStudenata.put("Marko", 85);
+        oceneStudenata.put("Jelena", 95);
+
+        // Prikazivanje vrednosti na osnovu ključa
+        System.out.println("Ocena za Anu: " + oceneStudenata.get("Ana"));
+
+        // Provera da li ključ postoji
+        if (oceneStudenata.containsKey("Marko")) {
+            System.out.println("Marko je u mapi.");
+        }
+
+        // Prikazivanje svih ključeva
+        System.out.println("Svi studenti: " + oceneStudenata.keySet());
+
+        // Prikazivanje svih vrednosti
+        System.out.println("Sve ocene: " + oceneStudenata.values());
+
+        // Uklanjanje para ključ-vrednost
+        oceneStudenata.remove("Jelena");
+
+        // Prikazivanje veličine mape
+        System.out.println("Broj studenata: " + oceneStudenata.size());
+
+        // Iteracija kroz mapu
+        for (Map.Entry<String, Integer> entry : oceneStudenata.entrySet()) {
+            System.out.println(entry.getKey() + " ima ocenu " + entry.getValue());
+        }
+    }
+}
+
+23. pitanje
+
+HashMap u Javi - Teorijsko Objašnjenje
+
+HashMap je jedna od najčešće korišćenih kolekcija u Javi koja implementira Map interfejs. Ova struktura podataka koristi heširanje kako bi brzo pristupila vrednostima preko ključeva. Heširanje omogućava da se elementi brzo pronalaze, dodaju i brišu, što je čini veoma efikasnom.
+
+Ključne Karakteristike HashMap-a
+
+1. Heširanje: HashMap koristi heš funkciju za generisanje indeksa na osnovu ključev. Ovo omogućava brzo pronalaženje vrednosti.
+
+2. Skladištenje: Podaci se skladište u paru (ključ, vrednost).
+
+3. Neuređenost: Redosled elemenata u HashMap nije garantovan.
+
+4. Dozvoljava null vrednosti: HashMap može imati jedan null ključ i više null vrednosti.
+
+Osnovne Operacije
+
+1. Stavljanje vrednosti: put(K ključ, V vrednost) - Dodaje par (ključ, vrednost) u mapu.
+
+2. Dobijanje vrednosti: get(Object ključ) - Vraća vrednost za dati ključ.
+
+3. Provera postojanja ključa: containsKey(Object ključ) - Proverava da li mapa sadrži dati ključ.
+
+4. Uklanjanje elementa: remove(Object ključ) - Uklanja par (ključ, vrednost) iz mape za dati ključ.
+
+5. Veličina mape: size() - Vraća broj parova u mapi.
+
+Primer Upotrebe HashMap-a u Javi
+
+import java.util.HashMap;
+
+public class PrimerHashMapa {
+    public static void main(String[] args) {
+        // Kreiranje HashMap-e
+        HashMap<String, Integer> mapaOcena = new HashMap<>();
+
+        // Dodavanje elemenata u mapu
+        mapaOcena.put("Matematika", 90);
+        mapaOcena.put("Fizika", 85);
+        mapaOcena.put("Hemija", 92);
+
+        // Prikazivanje elemenata mape
+        System.out.println("Ocene: " + mapaOcena);
+
+        // Dobijanje vrednosti za ključ
+        int ocenaMatematika = mapaOcena.get("Matematika");
+        System.out.println("Ocena iz Matematike: " + ocenaMatematika);
+
+        // Provera postojanja ključa
+        boolean imaFiziku = mapaOcena.containsKey("Fizika");
+        System.out.println("Da li postoji ocena iz Fizike? " + imaFiziku);
+
+        // Uklanjanje elementa iz mape
+        mapaOcena.remove("Hemija");
+        System.out.println("Ocene nakon uklanjanja Hemije: " + mapaOcena);
+
+        // Veličina mape
+        int brojPredmeta = mapaOcena.size();
+        System.out.println("Broj predmeta: " + brojPredmeta);
+    }
+}
+
+24. pitanje
+
+Теоријско објашњење TreeMap класе
+
+TreeMap је класа у java.util пакету која имплементира интерфејс NavigableMap. То је мапа која сортира своје кључеве користећи природни редослед или компаратор који је обезбеђен при креирању мапе. TreeMap користи структуру података која се зове црвено-црно дрво за имплементацију, што омогућава да операције као што су get, put, remove и навигација буду веома ефикасне (са временском сложеношћу O(log n)).
+
+Основне карактеристике TreeMap-а:
+
+1. Сортирање: TreeMap сортира елементе по природном редоследу (редослед дефинисан методом compareTo у класама кључева) или по редоследу дефинисаном компаратором.
+
+2. Навигација: TreeMap омогућава методе за навигацију као што су firstKey(), lastKey(), headMap(), tailMap(), и subMap().
+
+3. Конзистентност: TreeMap не дозвољава null вредности као кључеве (баца NullPointerException ако се покуша убацивање null кључа).
+
+Пример употребе TreeMap-а у Јави
+
+У наставку је пример како се користи TreeMap у Јави
+
+import java.util.TreeMap;
+
+public class PrimerTreeMap {
+    public static void main(String[] args) {
+        // Креирање TreeMap-а
+        TreeMap<Integer, String> treeMap = new TreeMap<>();
+
+        // Додавање елемената у TreeMap
+        treeMap.put(3, "Три");
+        treeMap.put(1, "Један");
+        treeMap.put(4, "Четири");
+        treeMap.put(2, "Два");
+
+        // Исписивање TreeMap-а
+        System.out.println("TreeMap садржај: " + treeMap);
+
+        // Приступање елементима TreeMap-а
+        System.out.println("Кључ 2 има вредност: " + treeMap.get(2));
+
+        // Први и последњи кључ
+        System.out.println("Први кључ: " + treeMap.firstKey());
+        System.out.println("Последњи кључ: " + treeMap.lastKey());
+
+        // Подмапе
+        System.out.println("Подмапа од кључа 1 до кључа 3: " + treeMap.subMap(1, 3));
+
+        // Уклањање елемента
+        treeMap.remove(2);
+        System.out.println("TreeMap након уклањања кључа 2: " + treeMap);
+
+        // Навигација
+        System.out.println("Кључ мањи или једнак 3: " + treeMap.floorKey(3));
+        System.out.println("Кључ већи или једнак 3: " + treeMap.ceilingKey(3));
+    }
+}
+
+25. pitanje
+
+Generici i kolekcije su dva važna koncepta u programskom jeziku Java koji omogućavaju veću fleksibilnost i sigurnost prilikom rukovanja objektima i podacima. U nastavku ću pružiti detaljna teorijska objašnjenja sa primerima.
+
+Generici (Generics) - Teorijsko objašnjenje
+
+Generici su uvedeni u Javu verzijom 5.0 kako bi omogućili definisanje klasa, interfejsa i metoda sa tipovima parametara. Oni omogućavaju kreiranje klasa koje mogu raditi sa bilo kojim objektom, uz zadržavanje tipne sigurnosti.
+
+Ključne prednosti generika su:
+
+1. Tipna sigurnost: Greške u tipu se otkrivaju u vreme kompajliranja, a ne u vreme izvršavanja.
+
+2. Ponovna upotreba koda: Kôd može biti napisan jednom i korišćen sa različitim tipovima.
+
+3. Smanjenje kastovanja: Potreba za eksplicitnim kastovanjem se smanjuje, što čini kôd čitljivijim i manje sklonim greškama.
+
+Primer generika
+
+// Definisanje generičke klase
+public class Box<T> {
+    private T content;
+
+    public void setContent(T content) {
+        this.content = content;
+    }
+
+    public T getContent() {
+        return content;
+    }
+
+    public static void main(String[] args) {
+        // Kreiranje Box objekta za Integer
+        Box<Integer> integerBox = new Box<>();
+        integerBox.setContent(123);
+        System.out.println("Integer Box content: " + integerBox.getContent());
+
+        // Kreiranje Box objekta za String
+        Box<String> stringBox = new Box<>();
+        stringBox.setContent("Hello Generics");
+        System.out.println("String Box content: " + stringBox.getContent());
+    }
+}
+
+Kolekcije (Collections) - Teorijsko objašnjenje
+
+Kolekcije u Javi predstavljaju arhitekturu koja omogućava rad sa grupama objekata. One pružaju različite strukture podataka kao što su liste, skupovi, mape, itd. Java Collections Framework (JCF) je deo Java standardne biblioteke i pruža osnovne i napredne strukture podataka i algoritme za rad sa njima.
+
+Glavne komponente JCF su:
+
+1. Interfejsi: Definišu strukture podataka i osnovne operacije. Primeri su List, Set, Map.
+
+2. Implementacije: Konkretne klase koje implementiraju interfejse. Primeri su ArrayList, HashSet, HashMap.
+
+3. Algoritmi: Metode za manipulaciju kolekcijama, kao što su sortiranje i pretraga. Implementirani su u Collections klasi.
+
+Primer kolekcija
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CollectionsExample {
+    public static void main(String[] args) {
+        // Kreiranje liste
+        List<String> fruits = new ArrayList<>();
+
+        // Dodavanje elemenata u listu
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+
+        // Ispis elemenata liste
+        System.out.println("Fruits list: " + fruits);
+
+        // Uklanjanje elementa iz liste
+        fruits.remove("Banana");
+        System.out.println("After removing Banana: " + fruits);
+
+        // Iteracija kroz listu
+        System.out.println("Iterating through the list:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+
+        // Provera da li lista sadrži element
+        boolean hasApple = fruits.contains("Apple");
+        System.out.println("List contains Apple: " + hasApple);
+    }
+}
+
+Napravimo generičku kolekciju koja će raditi kao jednostavna lista. Ova generička kolekcija će omogućiti dodavanje, preuzimanje i uklanjanje elemenata, kao i dobijanje trenutne veličine liste.
+
+Generička kolekcija
+Evo kako možete implementirati jednostavnu generičku kolekciju u Javi:
+
+// Definisanje generičke kolekcije
+public class GenericList<T> {
+    private Object[] elements;
+    private int size;
+
+    // Početni kapacitet liste
+    private static final int DEFAULT_CAPACITY = 10;
+
+    // Konstruktor bez parametara koji koristi početni kapacitet
+    public GenericList() {
+        elements = new Object[DEFAULT_CAPACITY];
+    }
+
+    // Metoda za dodavanje elementa u listu
+    public void add(T element) {
+        if (size == elements.length) {
+            resize();
+        }
+        elements[size++] = element;
+    }
+
+    // Metoda za preuzimanje elementa sa određene pozicije
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        return (T) elements[index];
+    }
+
+    // Metoda za uklanjanje elementa sa određene pozicije
+    public T remove(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        @SuppressWarnings("unchecked")
+        T element = (T) elements[index];
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(elements, index + 1, elements, index, numMoved);
+        }
+        elements[--size] = null; // Čišćenje referenci
+        return element;
+    }
+
+    // Metoda za dobijanje trenutne veličine liste
+    public int size() {
+        return size;
+    }
+
+    // Privatna metoda za povećanje kapaciteta liste
+    private void resize() {
+        int newCapacity = elements.length * 2;
+        Object[] newArray = new Object[newCapacity];
+        System.arraycopy(elements, 0, newArray, 0, elements.length);
+        elements = newArray;
+    }
+
+    // Glavna metoda za testiranje
+    public static void main(String[] args) {
+        GenericList<String> stringList = new GenericList<>();
+        stringList.add("Apple");
+        stringList.add("Banana");
+        stringList.add("Cherry");
+
+        System.out.println("Element at index 1: " + stringList.get(1)); // Banana
+        System.out.println("Size before removal: " + stringList.size()); // 3
+
+        stringList.remove(1);
+
+        System.out.println("Element at index 1 after removal: " + stringList.get(1)); // Cherry
+        System.out.println("Size after removal: " + stringList.size()); // 2
+    }
+}
+
+26. pitanje
+
+Teorijsko objašnjenje
+
+Džoker tipovi (Wildcard types) se koriste u generičkim tipovima da označe neodređene tipove. Najčešće se koriste sa generičkim klasama i metodama da bi se omogućila veća fleksibilnost. U Javi, džoker tipovi se označavaju sa ?.
+
+Postoje tri glavne vrste džoker tipova:
+
+1. Neograničeni džoker (?): Označava bilo koji tip.
+
+2. Ograničeni džoker gornjim ograničenjem (? extends T): Označava bilo koji tip koji je podklasa (ili implementira) tipa T.
+
+3. Ograničeni džoker donjim ograničenjem (? super T): Označava bilo koji tip koji je nadklasa tipa T.
+
+Primeri
+
+1. Neograničeni džoker
+
+import java.util.List;
+
+public class WildcardExample {
+    public static void printList(List<?> list) {
+        for (Object elem : list) {
+            System.out.println(elem);
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> intList = List.of(1, 2, 3);
+        List<String> strList = List.of("a", "b", "c");
+
+        printList(intList);  // Može prihvatiti List<Integer>
+        printList(strList);  // Može prihvatiti List<String>
+    }
+}
+
+2. Ograničeni džoker gornjim ograničenjem
+
+import java.util.List;
+
+public class BoundedWildcardExample {
+    public static double sumOfNumbers(List<? extends Number> list) {
+        double sum = 0.0;
+        for (Number num : list) {
+            sum += num.doubleValue();
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> intList = List.of(1, 2, 3);
+        List<Double> doubleList = List.of(1.1, 2.2, 3.3);
+
+        System.out.println("Sum of intList: " + sumOfNumbers(intList));        // Radi sa List<Integer>
+        System.out.println("Sum of doubleList: " + sumOfNumbers(doubleList));  // Radi sa List<Double>
+    }
+}
+
+3. Ograničeni džoker donjim ograničenjem
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LowerBoundWildcardExample {
+    public static void addNumbers(List<? super Integer> list) {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+    }
+
+    public static void main(String[] args) {
+        List<Number> numList = new ArrayList<>();
+        List<Object> objList = new ArrayList<>();
+
+        addNumbers(numList);  // Radi sa List<Number>
+        addNumbers(objList);  // Radi sa List<Object>
+
+        System.out.println("numList: " + numList);
+        System.out.println("objList: " + objList);
+    }
+}
+
+27. pitanje
+
+U Javi, ograničenja nad "wildcard" (џокер) типом се користе да би се дефинисала флексибилност колекција, док се истовремено ограничава тип података који се може користити. Постоје два главна типа ограничења:
+
+1. Upper Bounded Wildcards (горња ограничена џокер типа): користи се ? extends T, где T представља горњу границу. Ово значи да колекција може да садржи објекте типа T или његових поткласа.
+
+2. Lower Bounded Wildcards (доња ограничена џокер типа): користи се ? super T, где T представља доњу границу. Ово значи да колекција може да садржи објекте типа T или његових надкласа.
+
+Ево примера за оба типа ограничења у Јави:
+
+Upper Bounded Wildcards
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        List<? extends Number> list = new ArrayList<Integer>();
+        // List може садржати објекте типа Integer или његових поткласа
+
+        // Додавање елемената није дозвољено због типске сигурности
+        // list.add(10); // компајлерска грешка
+
+        // Могуће је читати елементе као Number
+        Number num = list.get(0);
+    }
+
+    public static double sumOfList(List<? extends Number> list) {
+        double sum = 0.0;
+        for (Number num : list) {
+            sum += num.doubleValue();
+        }
+        return sum;
+    }
+}
+
+Lower Bounded Wildcards
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        List<? super Integer> list = new ArrayList<Number>();
+        // List може садржати објекте типа Integer или његових надкласа
+
+        // Додавање елемената је дозвољено
+        list.add(10);
+        list.add(20);
+
+        // Читање елемената мора бити као Object
+        Object obj = list.get(0);
+    }
+
+    public static void addIntegers(List<? super Integer> list) {
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+    }
+}
+
+Теоријско објашњење
+
+Upper Bounded Wildcards (? extends T)
+
+Ово ограничење дозвољава приступ елементима колекције, али не и додавање нових елемената (осим null).
+Корисно је када желите да читате из колекције и радите са елементима као објектима типа T или његових поткласа.
+
+Lower Bounded Wildcards (? super T)
+
+Ово ограничење дозвољава додавање елемената у колекцију, али не и приступ специфичним типовима елемената (осим као објекти Object).
+Корисно је када желите да додате елементе у колекцију и знате да су ти елементи типа T или његових надкласа.
+
+28. pitanje
+
+U Javi, generički tipови и ограничења су веома корисни за рад са типовима на флексибилан начин, док истовремено осигуравају типску безбедност. Џокер типови са ограничењима (bounded wildcards) се користе за дефинисање граница типова које један тип може преузети.
+
+Теоријска објашњења
+
+1. Неограничени џокер тип (?):
+
+Користи се када тип параметра може бити било који тип.
+Пример: List<?> може бити листа било ког типа.
+
+2. Горње ограничење џокер типа (? extends T):
+
+Користи се када желимо да тип буде одређеног типа T или његов подтип.
+Пример: List<? extends Number> значи листа било ког типа који је подтип класе Number, као што су Integer, Double, итд.
+
+3. Доње ограничење џокер типа (? super T):
+
+Користи се када желимо да тип буде одређеног типа T или његов супертим.
+Пример: List<? super Integer> значи листа било ког типа који је супертим класе Integer, као што су Number, Object, итд.
+
+Примери имплементације у Јави
+
+Пример 1: Горње ограничење (? extends T)
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoundedWildcardsExample {
+
+    // Метод који прихвата листу елемената који су подтипови класе Number
+    public static void printList(List<? extends Number> list) {
+        for (Number num : list) {
+            System.out.println(num);
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> intList = new ArrayList<>();
+        intList.add(1);
+        intList.add(2);
+        intList.add(3);
+
+        List<Double> doubleList = new ArrayList<>();
+        doubleList.add(1.1);
+        doubleList.add(2.2);
+        doubleList.add(3.3);
+
+        // Оба позива су валидна јер Integer и Double наследјују Number
+        printList(intList);
+        printList(doubleList);
+    }
+}
+
+Пример 2: Доње ограничење (? super T)
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoundedWildcardsExample {
+
+    // Метод који додаје Integer елементе у листу која прихвата типове који су супертимови Integer
+    public static void addNumbers(List<? super Integer> list) {
+        for (int i = 1; i <= 5; i++) {
+            list.add(i);
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Number> numList = new ArrayList<>();
+        List<Object> objList = new ArrayList<>();
+
+        // Оба позива су валидна јер Number и Object су супертимови Integer
+        addNumbers(numList);
+        addNumbers(objList);
+
+        System.out.println(numList);
+        System.out.println(objList);
+    }
+}
+
+Пример 3: Неограничени џокер тип (?)
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UnboundedWildcardsExample {
+
+    // Метод који штампа елементе било које листе
+    public static void printAll(List<?> list) {
+        for (Object elem : list) {
+            System.out.println(elem);
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> intList = new ArrayList<>();
+        intList.add(1);
+        intList.add(2);
+        intList.add(3);
+
+        List<String> strList = new ArrayList<>();
+        strList.add("један");
+        strList.add("два");
+        strList.add("три");
+
+        // Оба позива су валидна јер метод прихвата било који тип листе
+        printAll(intList);
+        printAll(strList);
+    }
+}
+
+Објашњење
+
+У примеру 1, метод printList користи горње ограничење да би осигурао да листа садржи елементе који су подтипови класе Number.
+У примеру 2, метод addNumbers користи доње ограничење да би осигурао да листа прихвата елементе типа Integer или супертимова класе Integer.
+У примеру 3, метод printAll користи неограничени џокер тип да би могао да штампа елементе било које листе, без обзира на тип елемената у листи.
+Коришћење џокер типова са ограничењима омогућава већу флексибилност и реусабилност кода, истовремено осигуравајући типску безбедност у Јави.
+
+29. pitanje
+
+Апстрактне колекцијске класе у Јави
+
+У Јави, апстрактне колекцијске класе представљају основе за креирање нових врста колекција. Оне дефинишу структуру и понашање које конкретне колекције треба да имплементирају. Ове класе обезбеђују основне методе које олакшавају развој и управљање колекцијама.
+
+Основни концепти апстрактних колекција
+
+1. Апстрактна класа: Класа која не може бити инстанцирана, али може имати методе са имплементацијом и апстрактне методе које морају бити имплементиране у наследницима.
+
+2. Интерфејс: Дефинише скуп метода које класа мора да имплементира. Не садржи имплементацију метода.
+
+Пример апстрактне класе AbstractCollection
+
+import java.util.*;
+
+public abstract class MyAbstractCollection<E> implements Collection<E> {
+    // Пример поља за складиштење елемената
+    protected List<E> elements;
+
+    public MyAbstractCollection() {
+        elements = new ArrayList<>();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    @Override
+    public int size() {
+        return elements.size();
+    }
+
+    @Override
+    public boolean add(E e) {
+        return elements.add(e);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return elements.remove(o);
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return elements.contains(o);
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return elements.iterator();
+    }
+
+    // Остале методе могу бити имплементиране овде или остављене апстрактним
+}
+
+Пример креирања конкретне колекције
+Сада, када смо дефинисали основну апстрактну класу, можемо креирати конкретну колекцију која је наследи.
+
+public class MyConcreteCollection<E> extends MyAbstractCollection<E> {
+    // Додатне методе или промене понашања могу бити дефинисане овде
+
+    @Override
+    public boolean add(E e) {
+        // Пример специјалног понашања при додавању елемената
+        System.out.println("Додаје се елемент: " + e);
+        return super.add(e);
+    }
+}
+
+Тестирање нове колекције
+Да бисмо видели како наша нова колекција функционише, можемо написати једноставан програм који је користи.
+
+public class Main {
+    public static void main(String[] args) {
+        MyConcreteCollection<String> myCollection = new MyConcreteCollection<>();
+
+        myCollection.add("Први елемент");
+        myCollection.add("Други елемент");
+        myCollection.add("Трећи елемент");
+
+        System.out.println("Величина колекције: " + myCollection.size());
+
+        System.out.println("Елементи у колекцији:");
+        for (String s : myCollection) {
+            System.out.println(s);
+        }
+    }
+}
+
+Теоријски додатак
+
+Апстрактне колекцијске класе у Јави служе за дефинисање заједничког понашања колекција и олакшавање креирања нових типова колекција. На пример, AbstractList, AbstractSet, и AbstractMap су неке од унапред дефинисаних апстрактних класа које Јава пружа.
+
+1. AbstractList: Обезбеђује основу за листе са секвенцијалним приступом елементима.
+
+2. AbstractSet: Обезбеђује основу за скупове, колекције које не дозвољавају дупликате.
+
+3. AbstractMap: Обезбеђује основу за мапе, структуре које повезују кључеве са вредностима.
+
+Закључак
+Користећи апстрактне класе, програмери могу креирати нове типове колекција са минималним напором, користећи већ дефинисане методе и додајући специфично понашање. Ово омогућава лакшу одрживост и проширивост кода.
