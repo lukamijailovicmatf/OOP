@@ -1,4 +1,4 @@
-Odgovori na ispitna pitanja vezana za KOLEKCIJE PODATAKA
+Odgovori na ispitna pitanja vezana za KOLEKCIJE PODATAKA (sa SVIM PRIMERIMA!!!) - NAJVAZNIJE ZBOG PRIMERA JER GLEDA PROFESOR
 
 2. pitanje
 У Јави, апстрактне класе пружају основу за многе колекције. Апстрактне класе дефинишу општу функционалност и структуру, док специфичне имплементације обезбеђују конкретне детаље. Ево кратког прегледа апстрактних класа и примера на српском језику.
