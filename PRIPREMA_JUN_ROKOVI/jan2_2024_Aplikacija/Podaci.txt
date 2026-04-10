@@ -1,0 +1,13 @@
+Marko 9
+Milica 10
+Ivan 3
+Pera 5
+Milica 1
+Nenad 30
+Marko 6
+Tamara 1
+Katarina 5
+Marko 24
+Ivan 5
+Marko 13
+Nenad 70
